@@ -1,0 +1,105 @@
+﻿@using Locs4Youth.Models
+@{
+    Layout = "_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xs-6">
+        <h3>Aangeboden Locaties</h3>
+    </div>
+    <div class="col-xs-6">
+        <a href="@Url.Action("Offer", "Locations")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Aanbieden</a>
+    </div>
+</div>
+@if (ViewBag.Locations.Count == 0)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <p>U heeft nog geen locaties aangeboden.</p>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table well well-sm">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Locatie</th>
+                <th>Tijdstip</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Location loc in ViewBag.Locations)
+            {
+                <tr>
+                    <td>
+                        @if (loc.Approved)
+                        {
+                            <span class="label label-success">GOEDGEKEURD</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default">IN AFWACHTING</span>
+                        }
+                    </td>
+                    <td>@Html.ActionLink(loc.Title, "Detail", "Locations", new { @id = loc.Id }, new { @target = "_blank" })</td>
+                    <td>@loc.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        @if (!loc.Approved)
+                        {
+                            <a href="@Url.Action("Edit", "Locations", new { @id = loc.Id }, null)"><i class="glyphicon glyphicon-edit"></i> Bewerk</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<h3>Gehuurde Locaties</h3>
+@if (ViewBag.Rentals.Count == 0)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <p>U heeft nog geen locaties gehuurd.</p>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table well well-sm">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Locatie</th>
+                <th>Van - Tot</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rental rent in ViewBag.Rentals)
+            {
+                <tr>
+                    <td>
+                        @if (rent.Approved)
+                        {
+                            <span class="label label-success">GOEDGEKEURD</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default">IN AFWACHTING</span>
+                        }
+                    </td>
+                    <td>@Html.ActionLink(@rent.Location.Title, "Detail", "Locations", new { @id = rent.LocationId }, new { @target = "_blank" })</td>
+                    <td>@rent.DateFrom.ToShortDateString() - @rent.DateTo.ToShortDateString()</td>
+                    <td>
+                    @if (DateTime.Now > rent.DateTo)
+                    {
+                        <a href="@Url.Action("Detail", "Locations", new { @id = rent.LocationId })#ratings" target="_blank"><i class="glyphicon glyphicon-star"></i> Beoordelen</a>
+                    }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

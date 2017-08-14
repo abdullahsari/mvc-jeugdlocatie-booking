@@ -1,0 +1,13 @@
+﻿@model Locs4Youth.Models.SummaryEmailModel
+@{
+    Layout = "~/Views/Email/_Layout.cshtml";
+}
+<p>Hallo @Model.User.Firstname @Model.User.Lastname,</p>
+<p>
+    U heeft een aanvraag tot verhuur ingediend voor de locatie "@Model.LocationName". Hieronder vindt u een korte samenvatting.<br />
+</p>
+<p>
+    <strong>Begindatum:</strong> @Model.Rental.DateFrom.ToShortDateString() - <strong>Einddatum:</strong> @Model.Rental.DateTo.ToShortDateString()<br />
+    <strong>Bericht:</strong> @(Model.Rental.Message == null ? "N.V.T." : Model.Rental.Message)
+</p>
+<p>De status van de aanvraag kan geraadpleegd worden op <a href="@Request.Url.GetLeftPart(UriPartial.Authority)@Url.Action("Locations", "Account")">uw profiel</a>.</p>

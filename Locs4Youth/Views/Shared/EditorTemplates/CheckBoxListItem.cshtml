@@ -1,0 +1,7 @@
+﻿@model Locs4Youth.Models.CheckBoxListItem
+
+<div class="col-xs-6 col-md-2">
+    @Html.HiddenFor(model => model.ID)
+    @Html.CheckBoxFor(model => model.IsChecked, new { @id = Model.Display })
+    @Html.LabelFor(model => model.Display, Model.Display, new { @class = "checkbox-label", @for = Model.Display })
+</div>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Error";
+}
+@section Styles {
+    @Styles.Render("~/Content/css/error.css")
+}
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Sorry, something went wrong.</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-9">
+        <p class="subtitle">A team of highly trained monkeys has been dispatched to deal with this situation.</p>
+    </div>
+    <div class="col-xs-12 col-md-3">
+        <img alt="highly trained monkey" src="@Url.Content("~/Content/img/monkey.jpg")" class="img-responsive" />
+    </div>
+</div>

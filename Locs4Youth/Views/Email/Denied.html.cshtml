@@ -1,0 +1,8 @@
+﻿@model Locs4Youth.Models.DeniedEmailModel
+@{
+    Layout = "~/Views/Email/_Layout.cshtml";
+}
+<p>Hallo @Model.User.Firstname @Model.User.Lastname,</p>
+<p>
+    De aanbieder heeft helaas uw aanvraag voor de locatie "@Model.LocationName" afgekeurd.<br />
+</p>

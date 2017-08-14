@@ -1,0 +1,98 @@
+﻿@using Locs4Youth.Models
+@{
+    ViewBag.Title = "Uw Aanvragen tot verhuur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/Content/js/requests.js")
+}
+@Html.ActionLink("« Terug naar profiel", "Index", "Account")
+<h2>@ViewBag.Title</h2>
+@if (ViewBag.Pending.Count == 0)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <p>Er zijn op dit ogenblik geen aanvragen tot verhuur.</p>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table well well-sm">
+        <thead>
+            <tr>
+                <th>Gebruiker</th>
+                <th>Locatie</th>
+                <th>Van - Tot</th>
+                <th>Bericht</th>
+                <th>Goedkeuren</th>
+                <th>Afkeuren</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rental rent in ViewBag.Pending)
+            {
+                <tr>
+                    <td><a href="mailto:@rent.User.Email">@rent.User.Firstname @rent.User.Lastname</a></td>
+                    <td>@Html.ActionLink(rent.Location.Title, "Detail", "Locations", new { @id = rent.LocationId }, new { @target = "_blank" })</td>
+                    <td>@rent.DateFrom.ToShortDateString() - @rent.DateTo.ToShortDateString()</td>
+                    @if (rent.Message != null)
+                    {
+                        <td><button data-message="@rent.Message" type="button" class="btn btn-primary glyphicon glyphicon-comment"></button></td>
+                    }
+                    else
+                    {
+                        <td>nvt.</td>
+                    }
+                    <td>
+                        <a class="btn btn-success" href="@Url.Action("ApproveRequest", "Rental", new { @id = rent.Id }, null)"><i class="glyphicon glyphicon-ok"></i></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="@Url.Action("RejectRequest", "Rental", new { @id = rent.Id }, null)"><i class="glyphicon glyphicon-remove"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<h2>Goedgekeurde aanvragen</h2>
+@if (ViewBag.Approved.Count == 0)
+{
+    <div class="row bottom-buffer">
+        <div class="col-xs-12">
+            <p>U heeft nog geen aanvragen goedgekeurd.</p>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table well well-sm">
+        <thead>
+            <tr>
+                <th>Gebruiker</th>
+                <th>Locatie</th>
+                <th>Van - Tot</th>
+                <th>Bericht</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rental rent in ViewBag.Approved)
+            {
+                <tr>
+                    <td><a href="mailto:@rent.User.Email">@rent.User.Firstname @rent.User.Lastname</a></td>
+                    <td>@Html.ActionLink(rent.Location.Title, "Detail", "Locations", new { @id = rent.LocationId }, new { @target = "_blank" })</td>
+                    <td>@rent.DateFrom.ToShortDateString() - @rent.DateTo.ToShortDateString()</td>
+                    @if (rent.Message != null)
+                    {
+                        <td><button data-message="@rent.Message" type="button" class="btn btn-primary glyphicon glyphicon-comment"></button></td>
+                    }
+                    else
+                    {
+                        <td>nvt.</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

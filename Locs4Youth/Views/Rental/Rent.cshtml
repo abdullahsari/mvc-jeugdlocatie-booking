@@ -1,0 +1,75 @@
+﻿@model Locs4Youth.Models.RentModel
+@{
+    ViewBag.Title = "Huren";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    TempData.Keep("Location");
+}
+@section Scripts {
+    <script>
+        var site_url = '@Request.Url.GetLeftPart(UriPartial.Authority)';
+        var loc_id = @Model.LocationID;
+    </script>
+    @Scripts.Render(new string[] { "~/Content/js/bootstrap-datepicker.min.js", "~/Content/js/moment.min.js", "~/Content/js/fullcalendar.min.js", "~/Content/js/nl-be.js", "~/Content/js/rent.js" })
+}
+@section Styles {
+    @Styles.Render(new string[] { "~/Content/css/bootstrap-datepicker.standalone.min.css", "~/Content/css/fullcalendar.min.css", "~/Content/css/rent.css" })
+}
+@Html.ActionLink("« Terug naar detailpagina", "Detail", "Locations", new { @id = Model.LocationID }, null)
+<h2>@ViewBag.Title: @TempData["Location"]</h2>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <img alt="@TempData["Location"]" src="@Url.Content($"~/Content/img/locations/{Model.LocationID}.jpg")" class="img-responsive img-rounded" />
+    </div>
+    <div class="col-xs-12 col-md-6">
+        @using (Html.BeginForm("Rent", "Rental", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.From, new { @class = "control-label" })
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+                            @Html.TextBoxFor(model => model.From, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.From, string.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.To, new { @class = "control-label" })
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+                            @Html.TextBoxFor(model => model.To, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.To, string.Empty, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Message, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.Message, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <input type="submit" value="Aanvragen" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.LocationID)
+        }
+    </div>
+</div>
+<hr />
+<h2>Beschikbaarheid</h2>
+<div class="row">
+    <div class="col-xs-12">
+        <div id="calendar"></div>
+    </div>
+</div>

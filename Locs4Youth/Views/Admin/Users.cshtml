@@ -1,0 +1,51 @@
+﻿@using Locs4Youth.Models;
+@model List<User>
+@{
+    ViewBag.Title = "Admin Portaal: Gebruikers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/Content/js/users.js")
+}
+@Html.ActionLink("« Terug naar portaal", "Index", "Admin")
+<h2>@ViewBag.Title</h2>
+<table class="table well well-sm">
+    <thead>
+        <tr>
+            <th>E-mail</th>
+            <th>Naam</th>
+            <th>Avatar</th>
+            <th>Rol</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (User usr in Model)
+        {
+            string dir = Url.Content("~/Content/img/avatars/");
+            string avatar = null, path = dir + usr.Id + ".jpg";
+            if (File.Exists(Server.MapPath(path)))
+            {
+                avatar = path;
+            }
+            else
+            {
+                avatar = dir + "default.png";
+            }
+            <tr>
+                <td><a href="mailto:@usr.Email">@usr.Email</a></td>
+                <td>@usr.Firstname @usr.Lastname</td>
+                <td><img alt="@usr.Firstname @usr.Lastname" src="@avatar" width="64" /></td>
+                <td>
+                    @if (usr.Role == "admin")
+                    {
+                        <span>👑 Administrator</span>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary promote" href="@Url.Action("Promote", "Admin", new { @id = usr.Id }, null)">👤 Gebruiker</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

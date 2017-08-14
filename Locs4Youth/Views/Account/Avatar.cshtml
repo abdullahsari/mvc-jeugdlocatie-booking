@@ -1,0 +1,38 @@
+﻿@model Locs4Youth.Models.AvatarModel
+@{
+    Layout = "_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render(new string[] { "~/Content/js/avatar.js", "~/bundles/jqueryval" })
+}
+<h3>Avatar Wijzigen</h3>
+@using (Html.BeginForm("Avatar", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
+<div class="row">
+    <div class="form-group">
+        <div class="col-xs-12 col-md-2">
+            @Html.LabelFor(model => model.Image, new { @class = "control-label" })
+        </div>
+        <div class="col-xs-12 col-md-10">
+            <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-black">
+                        <i class="glyphicon glyphicon-folder-open"></i> Bladeren... @Html.TextBoxFor(model => model.Image, new { @type = "file", @style = "display: none;" })
+                    </span>
+                </label>
+                <input type="text" class="form-control" readonly />
+            </div>
+            @Html.ValidationMessageFor(model => model.Image, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="row top-buffer">
+    <div class="form-group">
+        <div class="col-xs-12 col-md-offset-2">
+            <input type="submit" value="Wijzigen" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}

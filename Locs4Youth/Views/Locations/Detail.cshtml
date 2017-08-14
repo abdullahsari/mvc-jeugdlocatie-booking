@@ -1,0 +1,237 @@
+﻿@using Locs4Youth.Models
+@using Locs4Youth.Utils
+@model RateModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ViewBag.Location.Title;
+    string aanbieder = Url.Content("~/Content/img/avatars/") + ImageHelper.GetAvatar(Server.MapPath(Url.Content("~/Content/img/avatars/")), ViewBag.Location.UserId);
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@section Styles {
+    @Styles.Render("~/Content/css/detail.css")
+}
+<section>
+    @Html.ActionLink("« Terug naar locaties zoeken", "Index", "Locations")
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <h2>
+                @ViewBag.Location.Title
+                @if (ViewBag.Average != 0)
+                {
+                <span class="semi">
+                @for (int i = 0; i < ViewBag.Average; i++)
+                {
+                    <i class="glyphicon glyphicon-star yellow"></i>
+                }
+                @for (int i = 5; i > ViewBag.Average; i--)
+                {
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                }
+                </span>
+                }
+            </h2>
+        </div>
+        <div class="col-xs-12 col-md-2">
+            @if (User.Identity.IsAuthenticated)
+            { 
+                <a id="rent" class="pull-right btn btn-success" href="@Url.Action("Rent", "Rental", new { @id = ViewBag.Location.Id }, null)"><i class="glyphicon glyphicon-home"></i> Huren</a> 
+            }
+            else
+            {
+                <p class="pull-right"><a href="@Url.Action("SignIn", "Account", new { @returnUrl = Url.Encode(Request.Url.AbsolutePath) }, null)"><i class="glyphicon glyphicon-log-in"></i> Log in om te huren.</a></p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 semi">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-5">
+            <img alt="@ViewBag.Location.Title" src="@Url.Content($"~/Content/img/locations/{ViewBag.Location.Id}.jpg")" class="img-responsive img-rounded" />
+        </div>
+        <div class="col-xs-12 col-md-7">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="address">@ViewBag.Location.Address, @ViewBag.Location.City (@ViewBag.Location.Region)</p>
+                </div>
+                <div class="col-xs-12">
+                    <div class="google-maps">
+                        <iframe src="https://www.google.com/maps/embed/v1/place?q=@ViewBag.Location.Address.Replace(' ', '+'),+@ViewBag.Location.City,+België&key=AIzaSyAhdnYO8LPfUI-gyYUPBZOh6Gsn1kc9BpM"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Aangeboden Door</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-2">
+            <img alt="Aanbieder" src="@aanbieder" class="img-responsive thumbnail" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-10">
+            <div class="row">
+                <div class="col-xs-12">
+                    <strong class="big">@ViewBag.Location.User.Firstname @ViewBag.Location.User.Lastname</strong>
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-xs-12 big">
+                    <i class="glyphicon glyphicon-envelope"></i> <a href="mailto:@ViewBag.Location.User.Email">@ViewBag.Location.User.Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="bottom-buffer" />
+    <div class="row">
+        <div class="col-xs-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Beschrijving</h3>
+                </div>
+                <div id="description" class="panel-body">
+                    <p><i class="glyphicon glyphicon-user"></i> Max Aantal Personen:  <strong>@ViewBag.Location.Capacity</strong></p>
+                    <hr />
+                    @Html.Raw(ViewBag.Location.Description)
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Faciliteiten</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @if (ViewBag.Features == null)
+                        {
+                            foreach (string feature in ViewBag.Features)
+                            {
+                                <div class="col-xs-6 col-sm-3 feature">
+                                    @feature
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-xs-6 col-sm-3 feature">
+                                Geen
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr id="ratings" />
+    <div class="row">
+        <div class="col-xs-12 col-sm-9">
+            <h3>Beoordelingen (@ViewBag.Ratings.Count)</h3>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            @if (ViewBag.Average != 0)
+            {
+                <p class="semi">
+                    Gemiddelde:
+                @for (int i = 0; i < ViewBag.Average; i++)
+                {
+                    <i class="glyphicon glyphicon-star yellow"></i>
+                }
+                @for (int i = 5; i > ViewBag.Average; i--)
+                {
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                }
+                </p>
+            }
+        </div>
+    </div>
+    <div class="row">
+    @if (Model == null)
+    {
+        <p>U moet <a href="@Url.Action("SignIn", "Account", new { @returnUrl = Url.Encode(Request.Url.AbsolutePath) + "#ratings" }, null)">ingelogd zijn</a> om een beoordeling te kunnen plaatsen.</p>
+    }
+    else
+    {
+        if (ViewBag.CanRate)
+        {
+            using (Html.BeginForm("Rate", "Locations", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.LocationID)
+        <div class="form-group">
+            <div class="col-xs-12 col-sm-8">
+                <span class="rating">
+                    @Html.RadioButtonFor(model => model.Score, 5, new { @class = "rating-input", @id = "rating-input-1-5" })
+                    @Html.LabelFor(model => model.Score, new { @class = "rating-star", @for = "rating-input-1-5" })
+                    @Html.RadioButtonFor(model => model.Score, 4, new { @class = "rating-input", @id = "rating-input-1-4" })
+                    @Html.LabelFor(model => model.Score, new { @class = "rating-star", @for = "rating-input-1-4" })
+                    @Html.RadioButtonFor(model => model.Score, 3, new { @class = "rating-input", @id = "rating-input-1-3" })
+                    @Html.LabelFor(model => model.Score, new { @class = "rating-star", @for = "rating-input-1-3" })
+                    @Html.RadioButtonFor(model => model.Score, 2, new { @class = "rating-input", @id = "rating-input-1-2" })
+                    @Html.LabelFor(model => model.Score, new { @class = "rating-star", @for = "rating-input-1-2" })
+                    @Html.RadioButtonFor(model => model.Score, 1, new { @class = "rating-input", @id = "rating-input-1-1" })
+                    @Html.LabelFor(model => model.Score, new { @class = "rating-star", @for = "rating-input-1-1" })
+                </span>
+            </div>
+            <div class="col-xs-12 col-sm-11">
+                <div class="input-group">
+                    <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-comment"></i></span>
+                    @Html.TextBoxFor(model => model.Message, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Message, string.Empty, new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-12 col-sm-1">
+                <input type="submit" value="Verzenden" class="btn btn-primary" />
+            </div>
+        </div>
+            }
+        }
+        else
+        {
+            <p>U moet deze locatie ten minste 1 keer bezocht hebben om een beoordeling te kunnen plaatsen.</p>
+        }
+    }
+    </div>
+    <div class="row top-buffer">
+        @foreach (Rating rating in ViewBag.Ratings)
+        {
+        string avatar = Url.Content("~/Content/img/avatars/") + ImageHelper.GetAvatar(Server.MapPath(Url.Content("~/Content/img/avatars/")), rating.UserId);
+        <div class="col-xs-3 col-md-1">
+            <div class="thumbnail">
+                <img alt="@rating.User.Firstname" src="@avatar" class="img-responsive" />
+            </div>
+        </div>
+        <div class="col-xs-9 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="pull-left">
+                        <strong>@rating.User.Firstname @rating.User.Lastname</strong>
+                        <time class="text-muted" datetime="@rating.Date">@rating.Date.ToShortDateString()</time>
+                    </div>
+                    <span class="pull-right">
+                        @for (int i = 0; i < rating.Score; i++)
+                        {
+                            <i class="glyphicon glyphicon-star yellow"></i>
+                        }
+                        @for (int i = 5; i > rating.Score; i--)
+                        {
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                        }
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <i class="glyphicon glyphicon-comment"></i> @rating.Message
+                </div>
+            </div>
+        </div>
+        }
+    </div>            
+</section>

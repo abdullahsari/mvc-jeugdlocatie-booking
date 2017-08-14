@@ -1,0 +1,22 @@
+﻿/*
+* Home Stylesheet
+*
+* @author Muhammed Sari <muhammed.sari@student.odisee.be>
+*
+*/
+
+/*********************************************
+ * BANNER
+ *********************************************/
+
+.jumbotron {
+    padding-top: 5rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../img/home/banner.jpg');
+    position: relative;
+}
+
+.lead {
+    font-weight: bold;
+}

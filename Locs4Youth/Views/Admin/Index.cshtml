@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Admin Portaal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    @Styles.Render("~/Content/css/portal.css")
+}
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div id="god" class="col-md-6">
+        <img alt="Godfather" src="@Url.Content("~/Content/img/admin/god.png")" class="img-responsive img-rounded" />
+        <blockquote id="quote">What do you want of me? Tell me anything, but do what I beg you to do.</blockquote>
+    </div>
+    <div class="col-md-6">
+        <h3>Beheren</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.ActionLink($"⭐ Beoordelingen ({ViewBag.Ratings})", "Ratings", "Admin", null, new { @class = "btn btn-success btn-lg" })
+            </div>
+            <div class="col-xs-12 top-buffer">
+                @Html.ActionLink($"🏳 Locaties ({ViewBag.Locations})", "Locations", "Admin", null, new { @class = "btn btn-primary btn-lg" })
+            </div>
+            <div class="col-xs-12 top-buffer">
+                @Html.ActionLink($"👥 Gebruikers", "Users", "Admin", null, new { @class = "btn btn-info btn-lg" })
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.875" name="Booking">
+  <DataContextMoniker Name="/BookingDataContext" />
+  <nestedChildShapes>
+    <classShape Id="41fe78ba-5e92-4c18-80c0-be01bd4cf8ca" absoluteBounds="3.5, 3.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/BookingDataContext/Activation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e93c5527-b6b4-4a06-a144-7dd191356d76" absoluteBounds="3.515, 3.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="59fff165-7fc7-4a97-960a-954c63d90e63" absoluteBounds="3.5, 9.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/BookingDataContext/Feature" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2b02c1e0-baeb-46a7-9737-e98151e42023" absoluteBounds="3.515, 9.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="05ca67c3-3df0-4ace-9a9b-78609dcaadfa" absoluteBounds="6.25, 6.375, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/BookingDataContext/Location_has_Feature" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ee767e4c-2709-4669-8a7f-c9f7bb6d50ea" absoluteBounds="6.265, 6.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ddace6d9-7cc9-4059-88ce-a0564969eec7" absoluteBounds="3.5, 5.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/BookingDataContext/Location" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7761a82a-6d61-4c37-8d21-e79898255844" absoluteBounds="3.515, 6.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0cbdbab1-a7ab-4c35-b53a-d94c4eb86539" absoluteBounds="6.25, 2.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BookingDataContext/Rating" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b3e36b28-ee2d-47dc-b953-838bbba0f7a1" absoluteBounds="6.265, 2.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3dc4374b-1d3e-447e-9bee-b119c121d488" absoluteBounds="6.25, 8.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BookingDataContext/Rental" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4b8ab0d8-48cf-440d-8e3c-690946572484" absoluteBounds="6.265, 8.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d44c1526-97da-467c-bca2-01d589b6fe48" absoluteBounds="0.75, 4.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BookingDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f426079c-a937-4d54-8489-83c9bd9d252f" absoluteBounds="0.765, 5.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 9.375); (5.875 : 9); (5.875 : 7.06814697265625); (6.25 : 7.06814697265625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BookingDataContext/Feature/Feature_Location_has_Feature" />
+      <nodes>
+        <classShapeMoniker Id="59fff165-7fc7-4a97-960a-954c63d90e63" />
+        <classShapeMoniker Id="05ca67c3-3df0-4ace-9a9b-78609dcaadfa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.65907348632813); (6.25 : 6.65907348632813)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BookingDataContext/Location/Location_Location_has_Feature" />
+      <nodes>
+        <classShapeMoniker Id="ddace6d9-7cc9-4059-88ce-a0564969eec7" />
+        <classShapeMoniker Id="05ca67c3-3df0-4ace-9a9b-78609dcaadfa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 5.625); (5.875 : 5.25); (5.875 : 3.57774983723958); (6.25 : 3.57774983723958)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BookingDataContext/Location/Location_Rating" />
+      <nodes>
+        <classShapeMoniker Id="ddace6d9-7cc9-4059-88ce-a0564969eec7" />
+        <classShapeMoniker Id="0cbdbab1-a7ab-4c35-b53a-d94c4eb86539" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 8.29586450981571); (5.81607443490112 : 8.61193894471683 : JumpStart); (5.93392556509888 : 8.72979007491458 : JumpEnd); (6.0625 : 8.85836450981571); (6.0625 : 8.3125); (6.25 : 8.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BookingDataContext/Location/Location_Rental" />
+      <nodes>
+        <classShapeMoniker Id="ddace6d9-7cc9-4059-88ce-a0564969eec7" />
+        <classShapeMoniker Id="3dc4374b-1d3e-447e-9bee-b119c121d488" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 4.875); (1.75 : 4.1874995); (2.19791916666667 : 4.1874995 : JumpStart); (2.36458583333333 : 4.1874995 : JumpEnd); (3.5 : 4.1874995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BookingDataContext/User/User_Activation" />
+      <nodes>
+        <classShapeMoniker Id="d44c1526-97da-467c-bca2-01d589b6fe48" />
+        <classShapeMoniker Id="41fe78ba-5e92-4c18-80c0-be01bd4cf8ca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.32774983723958); (3.5 : 6.32774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BookingDataContext/User/User_Location" />
+      <nodes>
+        <classShapeMoniker Id="d44c1526-97da-467c-bca2-01d589b6fe48" />
+        <classShapeMoniker Id="ddace6d9-7cc9-4059-88ce-a0564969eec7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 4.875); (2.2812525 : 2.96875); (6.25 : 2.96875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BookingDataContext/User/User_Rating" />
+      <nodes>
+        <classShapeMoniker Id="d44c1526-97da-467c-bca2-01d589b6fe48" />
+        <classShapeMoniker Id="0cbdbab1-a7ab-4c35-b53a-d94c4eb86539" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 7.03049967447917); (1.75 : 8.9375025); (6.25 : 8.9375025)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BookingDataContext/User/User_Rental" />
+      <nodes>
+        <classShapeMoniker Id="d44c1526-97da-467c-bca2-01d589b6fe48" />
+        <classShapeMoniker Id="3dc4374b-1d3e-447e-9bee-b119c121d488" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

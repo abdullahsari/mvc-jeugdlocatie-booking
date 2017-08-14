@@ -1,0 +1,10 @@
+﻿<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : string.Empty) })</li>
+    <li>@Html.ActionLink("Locaties", "Index", "Locations", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Locations" ? "active" : string.Empty) })</li>
+    <li>@Html.ActionLink("FAQ", "FAQ", "Home", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "FAQ" ? "active" : string.Empty) })</li>
+    <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Contact" ? "active" : string.Empty) })</li>       
+    @if (User.IsInRole("admin"))
+    {
+        <li>@Html.ActionLink("Portaal", "Index", "Admin", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Admin" ? "active" : string.Empty) })</li>
+    }
+</ul>

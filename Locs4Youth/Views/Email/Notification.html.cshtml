@@ -1,0 +1,16 @@
+﻿@model Locs4Youth.Models.NotificationEmailModel
+@{
+    Layout = "~/Views/Email/_Layout.cshtml";
+}
+<p>Hallo @Model.Owner.Firstname @Model.Owner.Lastname,</p>
+<p>
+    U heeft een nieuwe aanvraag tot verhuur ontvangen voor de locatie "@Model.LocationName".<br />
+</p>
+<p>
+    <strong>Aanvrager:</strong> @Model.Requester.Firstname @Model.Requester.Lastname (<a href="mailto:@Model.Requester.Email">@Model.Requester.Email</a>)<br />
+    <strong>Begindatum:</strong> @Model.Rental.DateFrom.ToShortDateString() - <strong>Einddatum:</strong> @Model.Rental.DateTo.ToShortDateString()<br />
+    <strong>Bericht:</strong> @(Model.Rental.Message == null ? "N.V.T." : Model.Rental.Message)<br />
+</p>
+<p>
+    U kunt de aanvraag goed- of afkeuren op <a href="@Request.Url.GetLeftPart(UriPartial.Authority)@Url.Action("Locations", "Account")">uw profiel</a>.<br />
+</p>

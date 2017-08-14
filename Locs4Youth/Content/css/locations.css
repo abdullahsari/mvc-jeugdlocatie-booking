@@ -1,0 +1,15 @@
+﻿.city {
+    color: #008eb2;
+    font-size: 2rem;
+}
+
+.filter {
+    background: #f5f5f5 ;
+    border-bottom: 2px solid #fe7e07;
+    padding: 1rem;
+    width: 100%;
+}
+
+.top-margin {
+    margin-top: 2rem;
+}

@@ -1,0 +1,152 @@
+﻿@using Locs4Youth.Models
+@model FilterModel
+@{
+    ViewBag.Title = "Locaties Zoeken";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    @Styles.Render(new string[] { "~/Content/css/bootstrap-datepicker.standalone.min.css", "~/Content/css/locations.css" })
+}
+@section Scripts {
+    @Scripts.Render(new string[] { "~/Content/js/bootstrap-datepicker.min.js", "~/Content/js/locations.js" })
+}
+<div class="row">
+    <div class="col-xs-6">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col-xs-6">
+        <a href="@Url.Action("Index", "Locations")" class="btn btn-primary pull-right top-margin"><i class="glyphicon glyphicon-repeat"></i> Reset</a>
+    </div>
+</div>
+<div class="form-group filter">
+@using (Html.BeginForm("Index", "Locations", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            @Html.LabelFor(model => model.Region, new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                @Html.EnumDropDownListFor(model => model.Region, "Kies Regio", new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Region, string.Empty, new { @class = "text-danger" })
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "Naam van de locatie" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Title, string.Empty, new { @class = "text-danger" })
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            @Html.LabelFor(model => model.Capacity, new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control", @type = "number", @placeholder = "Capaciteit vanaf ..." })
+            </div>
+            @Html.ValidationMessageFor(model => model.Capacity, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            @Html.LabelFor(model => model.From, new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                @Html.TextBoxFor(model => model.From, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @placeholder = "Beschikbaar vanaf dd/mm/yyyy" })
+            </div>
+            @Html.ValidationMessageFor(model => model.From, string.Empty, new { @class = "text-danger" })
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            @Html.LabelFor(model => model.To, new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                @Html.TextBoxFor(model => model.To, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @placeholder = "Beschikbaar tot dd/mm/yyyy" })
+            </div>
+            @Html.ValidationMessageFor(model => model.To, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row top-margin">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="glyphicon glyphicon-search"></i> Zoeken
+            </button>
+        </div>
+    </div>
+}
+</div>
+<div class="row">
+@if (ViewBag.Locations.Count == 0)
+{
+    <div class="col-xs-12">
+        <p>
+            Er zijn geen locaties gevonden die voldoen aan uw zoekcriteria. 
+            @if (ViewBag.PartnerLocations.Count != 0) { <strong>Misschien staat een locatie van onze partners u aan?</strong> }
+        </p>
+    </div>
+    if (ViewBag.PartnerLocations != null)
+    {
+        foreach (SharedLocation loc in ViewBag.PartnerLocations)
+        {
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <article class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="@loc.Url" target="_blank">
+                            <h2 class="panel-title">@loc.Name</h2>
+                        </a>
+                    </div>
+                    <div class="panel-image">
+                        <a href="@loc.Url" target="_blank">
+                            <img src="@loc.Image" alt="@loc.Name" />
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p class="city">@loc.City</p>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="pull-right">
+                                    <a href="@loc.Url" target="_blank">Meer Informatie »</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        }
+    }
+}
+else
+{
+    foreach (Location loc in ViewBag.Locations)
+    {
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <article class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="@Url.Action("Detail", "Locations", new { @id = loc.Id }, null)">
+                        <h2 class="panel-title">@loc.Title</h2>
+                    </a>
+                </div>
+                <div class="panel-image">
+                    <a href="@Url.Action("Detail", "Locations", new { @id = loc.Id }, null)">
+                        <img src="@Url.Content($"~/Content/img/locations/{loc.Id}.jpg")" alt="@loc.Title" />
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="city">@loc.City</p>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="pull-right">
+                                @Html.ActionLink("Meer Informatie »", "Detail", "Locations", new { @id = loc.Id }, null)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    }
+}
+</div>
+

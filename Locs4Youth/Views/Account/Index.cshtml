@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+<h3>Overzicht</h3>
+<div class="row">
+    <div class="col-xs-12 col-md-offset-1">
+        <a class="btn btn-black btn-lg" href="@Url.Action("Requests", "Rental")"><i class="glyphicon glyphicon-tags"></i>&nbsp;Aanvragen     (@ViewBag.Requests) &raquo;</a>
+    </div>
+</div>
+<div class="row top-buffer">
+    <div class="col-xs-12 col-md-offset-1">
+        <ul style="font-size: 2rem;">
+            <li>Locaties in afwachting: <strong>@ViewBag.PendingLocations</strong></li>
+            <li>Goedgekeurde locaties: <strong>@ViewBag.Locations</strong></li>
+            <li>Beoordelingen in afwachting: <strong>@ViewBag.PendingRatings</strong></li>
+            <li>Goedgekeurde beoordelingen: <strong>@ViewBag.Ratings</strong></li>
+        </ul>
+    </div>
+</div>

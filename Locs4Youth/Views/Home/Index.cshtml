@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+@section Styles {
+    @Styles.Render("~/Content/css/home.css")
+}
+
+<div class="jumbotron">
+    <h2>Welkom bij Locs 4 Youth!</h2>
+    <p class="lead">Dé website om de meest geschikte locatie voor uw activiteit te vinden.</p>
+    <p>@Html.ActionLink("Vind uw locatie »", "Index", "Locations", null, new { @class = "btn btn-black btn-lg transparent" })</p>
+</div>
+
+<section class="row">
+    <h2 class="structural">Provincies</h2>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Oost-Vlaanderen</h3>
+            </div>
+            <div class="panel-image">
+                <img alt="Provincie Oost-Vlaanderen" src="~/Content/img/home/oost-vlaanderen.jpg">
+            </div>
+            <div class="panel-body text-center">
+                <p>Zoek uw locatie in regio Oost-Vlaanderen.</p>
+                @Html.ActionLink("Zoek »", "Index", "Locations", new { @province = "Oost-Vlaanderen" }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Antwerpen</h3>
+            </div>
+            <div class="panel-image">
+                <img alt="Provincie Antwerpen" src="~/Content/img/home/antwerpen.jpg">
+            </div>
+            <div class="panel-body text-center">
+                <p>Zoek uw locatie in regio Antwerpen.</p>
+                @Html.ActionLink("Zoek »", "Index", "Locations", new { @province = "Antwerpen" }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+</section>

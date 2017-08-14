@@ -1,0 +1,9 @@
+﻿@model Locs4Youth.Models.AcceptedEmailModel
+@{
+    Layout = "~/Views/Email/_Layout.cshtml";
+}
+<p>Hallo @Model.User.Firstname @Model.User.Lastname,</p>
+<p>
+    Proficiat! De aanbieder heeft uw aanvraag voor de locatie "@Model.LocationName" goedgekeurd.<br />
+    U kunt verder contact opnemen via het e-mailadres <a href="mailto:@Model.User.Email">@Model.User.Email</a>
+</p>

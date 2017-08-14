@@ -1,0 +1,118 @@
+﻿@model Locs4Youth.Models.EditModel
+@{
+    ViewBag.Title = "Aanbieden";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render(new string[] { "~/bundles/jqueryval", "~/Content/js/tinymce/tinymce.min.js", "~/Content/js/offer.js" })
+}
+<h2>Locatie bewerken (@Model.Title)</h2>
+@Html.ActionLink("« Terug naar profiel", "Locations", "Account")
+<div class="well well-sm">
+    @using (Html.BeginForm("Edit", "Locations", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.LocationID)
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12">
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Title, string.Empty, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = "8", @placeholder = "Voeg zaken toe zoals aantal (bad)kamers, mogelijkheden in de locatie..." })
+                    @Html.ValidationMessageFor(model => model.Description, string.Empty, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.Capacity, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12">
+                    @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control", @type = "number", @min = "1" })
+                    @Html.ValidationMessageFor(model => model.Capacity, string.Empty, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.Features, new { @class = "control-label" })
+                </div>
+                @Html.EditorFor(model => model.Features)
+                @Html.ValidationMessageFor(model => model.Features, string.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.Address, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12">
+                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Address, string.Empty, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.City, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12">
+                    @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.City, string.Empty, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.Region, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12">
+                    @Html.EnumDropDownListFor(model => model.Region, "Kies Regio", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Region, string.Empty, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.LabelFor(model => model.Image, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-black">
+                                <i class="glyphicon glyphicon-folder-open"></i> Bladeren... @Html.TextBoxFor(model => model.Image, new { @type = "file", @style = "display: none;" })
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly />
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Image, string.Empty, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input type="submit" value="Bewerken" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

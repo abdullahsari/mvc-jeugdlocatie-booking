@@ -1,0 +1,11 @@
+﻿textarea {
+    min-height: 23rem;
+}
+
+.fc-time {
+    display: none;
+}
+
+.fc-title {
+    font-size: 2rem;
+}

@@ -1,0 +1,159 @@
+﻿/*
+* Common Stylesheet
+*
+* @author Muhammed Sari <muhammed.sari@student.odisee.be>
+*
+*/
+
+/*********************************************
+ * GENERAL
+ *********************************************/
+
+html {
+    font-size: 0.625em;
+}
+
+body {
+    font-family: Segoe UI, sans-serif;
+    background-color: #fff;
+}
+
+body > * {
+    font-size: 1.3rem;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'MarketDeco';
+    font-weight: normal;
+    color: #fe7e07;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h3, h4, h5, h6 {
+    padding: 1rem;
+    margin: 0 !important;
+}
+
+#title {
+    color: #fff;
+    transition: all 0.5s;
+}
+
+#title:hover {
+    color: #fe7e07;
+}
+
+.top-buffer {
+    padding-top: 2rem;
+}
+
+.bottom-buffer {
+    padding-bottom: 1rem;
+}
+
+/*********************************************
+ * NAVIGATION 
+ *********************************************/
+
+#menu a {
+    color: #fff;
+    transition: all 0.3s
+}
+
+#menu a:hover {
+    color: #fe7e07;
+}
+
+.navbar-nav a {
+    color: #fff;
+}
+
+.navbar {
+    background: linear-gradient(to right, #002733, #008eb2);
+    border-bottom: none;
+}
+
+.navbar-brand {
+    font-family: 'MarketDeco';
+    font-weight: normal;
+}
+
+/*********************************************
+ * FOOTER
+ *********************************************/
+
+#logo {
+    max-height: 6rem;
+}
+
+footer {
+    line-height: 6rem;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: -2rem;
+    background-color: #f5f5f5;
+}
+
+/*********************************************
+ * ACTIONLINKS
+ *********************************************/
+
+a {
+    color: #008eb2;
+    text-decoration: none;
+    transition: all 0.3s
+}
+
+a.active {
+    color: #fe7e07 !important;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #fe7e07;
+}
+
+/*********************************************
+ * BUTTONS
+ *********************************************/
+
+.btn {
+    transition: all 0.5s;
+}
+
+.btn-black {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid #fff;
+}
+
+.btn-black:hover {
+    background: rgba(0, 0, 0, 1);
+    color: #008eb2;
+}
+
+/*********************************************
+ * PANEL
+ *********************************************/
+
+.panel-image img {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/*********************************************
+ * FONTS
+ *********************************************/
+
+@font-face {
+    font-family: 'MarketDeco';
+    src: url('../fonts/Market_Deco.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

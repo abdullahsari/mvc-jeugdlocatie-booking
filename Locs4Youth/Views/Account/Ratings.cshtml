@@ -1,0 +1,43 @@
+﻿@using Locs4Youth.Models
+@model List<Rating>
+@{
+    Layout = "_Layout.cshtml";
+}
+<h3>Mijn beoordelingen</h3>
+@if (Model.Count == 0)
+{
+    <p>U heeft nog geen beoordelingen geplaatst.</p>
+}
+else
+{
+    <table class="table well well-sm">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Score</th>
+                <th>Locatie</th>
+                <th>Bericht</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rating rating in Model)
+            {
+                <tr>
+                    <td>
+                        @if (rating.Approved)
+                        {
+                            <span class="label label-success">GOEDGEKEURD</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default">IN AFWACHTING</span>
+                        }
+                    </td>
+                    <td>@rating.Score</td>
+                    <td>@Html.ActionLink(rating.Location.Title, "Detail", "Locations", new { @id = rating.LocationId }, new { @target = "_blank" })</td>
+                    <td>@rating.Message</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

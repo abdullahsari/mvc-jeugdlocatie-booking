@@ -1,0 +1,20 @@
+﻿@if (TempData.ContainsKey("Message"))
+{
+    string type = null;
+    switch (TempData["MessageStatus"].ToString())
+    {
+        case "Success":
+            type = "success";
+            break;
+        case "Error":
+            type = "danger";
+            break;
+        default:
+            type = "info";
+            break;
+    }
+    <div class="alert alert-@type alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@TempData["Message"]</strong>
+    </div>
+}

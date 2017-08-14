@@ -1,0 +1,1221 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Locs4Youth</name>
+    </assembly>
+    <members>
+        <member name="M:Locs4Youth.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:Locs4Youth.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:Locs4Youth.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,Locs4Youth.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,Locs4Youth.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:Locs4Youth.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},Locs4Youth.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:Locs4Youth.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:Locs4Youth.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.#ctor(Locs4Youth.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Locs4Youth.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,Locs4Youth.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Locs4Youth.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:Locs4Youth.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Locs4Youth.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Locs4Youth.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:Locs4Youth.Controllers.AccountController">
+            <summary>
+            This controller handles everything related to a user
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Controllers.AdminController">
+            <summary>
+            This controller handles everything related to the Administration Portal
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Controllers.Api.SharedLocationsController">
+            <summary>
+            Provides information about locations
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Controllers.Api.SharedLocationsController.Get(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32})">
+            <summary>
+            Gets all locations that match the querystring (does not return anything if none of the parameters are set)
+            </summary>
+            <param name="location">(Optional) The name of the location</param>
+            <param name="address">(Optional) The address (street + number) of the location</param>
+            <param name="start_date">(Optional) Availability of location as of start_date</param>
+            <param name="end_date">(Optional) Availability of location until end_date</param>
+            <param name="guests">(Optional) The minimum amount of guests (capacity of the location)</param>
+            <returns>Matched locations</returns>
+        </member>
+        <member name="T:Locs4Youth.Controllers.Api.SharedRentalController">
+            <summary>
+            Provides rental data
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Controllers.Api.SharedRentalController.Get(System.Int32)">
+            <summary>
+            Gets all approved rentals for a location
+            </summary>
+            <param name="id">The location's ID to get the rentals for</param>
+            <returns>JSON of matched rentals</returns>
+        </member>
+        <member name="T:Locs4Youth.Controllers.EmailController">
+            <summary>
+            This controller handles everything related to sending e-mails
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Controllers.EmailController.ActivationMail(Locs4Youth.Models.User,System.Guid)">
+            <summary>
+            Generates a ready-to-be-sent activation e-mail using SMTP
+            </summary>
+            <param name="usr">The user the mail belongs to</param>
+            <param name="activationCode">Unique Activation ID</param>
+            <returns>E-mail</returns>
+        </member>
+        <member name="M:Locs4Youth.Controllers.EmailController.DeniedMail(Locs4Youth.Models.User,System.String)">
+            <summary>
+            Generates a ready-to-be-sent denied e-mail using SMTP
+            </summary>
+            <param name="usr">The user the mail belongs to</param>
+            <param name="locationName">Name of denied location</param>
+            <returns>E-mail</returns>
+        </member>
+        <member name="M:Locs4Youth.Controllers.EmailController.AcceptedMail(Locs4Youth.Models.User,System.String)">
+            <summary>
+            Generates a ready-to-be-sent accepted e-mail using SMTP
+            </summary>
+            <param name="usr">The user the mail belongs to</param>
+            <param name="locationName">Name of denied location</param>
+            <returns>E-mail</returns>
+        </member>
+        <member name="M:Locs4Youth.Controllers.EmailController.SummaryMail(Locs4Youth.Models.User,System.String,Locs4Youth.Models.Rental)">
+            <summary>
+            Generates a ready-to-be-sent summary e-mail using SMTP
+            </summary>
+            <param name="usr">The user the mail belongs to</param>
+                    /// <param name="locationName">Name of location</param>
+            <param name="rent">The rent request this email is for</param>
+            <returns>E-mail</returns>
+        </member>
+        <member name="M:Locs4Youth.Controllers.EmailController.NotificationMail(Locs4Youth.Models.User,Locs4Youth.Models.User,System.String,Locs4Youth.Models.Rental)">
+            <summary>
+            Generates a ready-to-be-sent notification e-mail using SMTP
+            </summary>
+            <returns>E-mail</returns>
+        </member>
+        <member name="T:Locs4Youth.Controllers.ErrorController">
+            <summary>
+            This controller handles everything related to displaying errors
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Controllers.HomeController">
+            <summary>
+            This controller handles everything related to displaying pages in home
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Controllers.LocationsController">
+            <summary>
+            This controller handles everyting related to locations
+            </summary>
+        </member>
+        <member name="T:Locs4Youth.Controllers.RentalController">
+            <summary>
+            This controller handles everything related to renting locations
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Models.Activation.HasActivation(System.Guid,System.Int32)">
+            <summary>
+            Determines if there is an activation code and deletes it if so
+            </summary>
+            <param name="code">Activation code</param>
+            <param name="userId">The user's ID</param>
+            <returns>The activation</returns>
+        </member>
+        <member name="T:Locs4Youth.Models.Fullcalendar">
+            <summary>
+            This model is used to populate client-side fullcalendar plugin
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.Fullcalendar.backgroundColor">
+            <summary>
+            The color to use with fullcalendar script
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.Fullcalendar.borderColor">
+            <summary>
+            The color to use with fullcalendar script
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.Fullcalendar.end">
+            <summary>
+            End date of the booking
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.Fullcalendar.overlap">
+            <summary>
+            Overlap on display
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.Fullcalendar.start">
+            <summary>
+            Start date of the booking
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.Fullcalendar.title">
+            <summary>
+            Text to display
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.LocationInfo.name">
+            <summary>
+            Title/Name of the location
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.LocationInfo.city">
+            <summary>
+            City of the location
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.LocationInfo.country">
+            <summary>
+            Country of the location
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.LocationInfo.image">
+            <summary>
+            Image URI of the location
+            </summary>
+        </member>
+        <member name="P:Locs4Youth.Models.LocationInfo.url">
+            <summary>
+            URL to the location
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Models.Feature.GetFeaturesAsCheckBoxListItem">
+            <summary>
+            Gets features as CheckBoxListItem
+            </summary>
+            <returns>List of CheckBoxListItems</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location_has_Feature.DeleteFeaturesForLocation(System.Int32)">
+            <summary>
+            Deletes all features that belong to a location
+            </summary>
+            <param name="locationId">The location's ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Location_has_Feature.InsertFeaturesForLocation(System.Int32,System.Collections.Generic.List{Locs4Youth.Models.CheckBoxListItem})">
+            <summary>
+            Populates the many-to-many table with entries associated to a location
+            </summary>
+            <param name="locationId">The location's ID</param>
+            <param name="features">The selected features</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Location_has_Feature.GetFeaturesForLocation(System.Int32)">
+            <summary>
+            Gets features for location
+            </summary>
+            <param name="locationId">Location ID</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.Approve(System.Int32)">
+            <summary>
+            Approves a location by ID
+            </summary>
+            <param name="id">Location's ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetAllApprovedLocations">
+            <summary>
+            Retrieves all approved locations
+            </summary>
+            <returns>List of approved locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetApprovedLocationsByRegion(Locs4Youth.Models.Region)">
+            <summary>
+            Retrieves all approved locations by region
+            </summary>
+            <returns>List of approved locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetLocationById(System.Int32)">
+            <summary>
+            Fetches a location entry from DB by id
+            </summary>
+            <param name="id">Location's ID</param>
+            <returns>A location object</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetUnconfirmedLocations">
+            <summary>
+            Retrieves all of the unconfirmed locations
+            </summary>
+            <returns>Unconfirmed locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetUnconfirmedAmount">
+            <summary>
+            Calculates the amount of unconfirmed locations
+            </summary>
+            <returns>amount of unconfirmed locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetConfirmedAmountForUser(System.String)">
+            <summary>
+            Calculates the amount of confirmed locations for user
+            </summary>
+            <returns>amount of unconfirmed locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetUnconfirmedAmountForUser(System.String)">
+            <summary>
+            Calculates the amount of unconfirmed locations for user
+            </summary>
+            <returns>amount of unconfirmed locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.GetAllLocationsForUser(System.String)">
+            <summary>
+            Fetches all locations that belong to one user
+            </summary>
+            <param name="email">The user's e-mail</param>
+            <returns>List of locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.InsertLocationOffer(System.Int32,Locs4Youth.Models.OfferModel)">
+            <summary>
+            Creates a new location entry in the database
+            </summary>
+            <param name="userId">The user the location belongs to</param>
+            <param name="model">Information about the location</param>
+            <returns>The ID of the inserted location</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.Delete(System.Int32)">
+            <summary>
+            Deletes a location by ID
+            </summary>
+            <param name="id">Location's ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Location.Update(Locs4Youth.Models.EditModel)">
+            <summary>
+            Updates a location
+            </summary>
+            <param name="model">Edit model</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.Approve(System.Int32)">
+            <summary>
+            Approve a rating
+            </summary>
+            <param name="id">Rating ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.UpdateRating(System.Int32,Locs4Youth.Models.RateModel)">
+            <summary>
+            Updates an existing rating
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.HasRating(System.String,System.Int32)">
+            <summary>
+            Check whether a user already has a rating for a location
+            </summary>
+            <param name="email">User's e-mail</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.AddRatingForLocation(System.Int32,Locs4Youth.Models.RateModel)">
+            <summary>
+            Adds a rating
+            </summary>
+            <param name="userId">The user's ID</param>
+            <param name="model">RateModel</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.GetConfirmedRatingsAmountForUser(System.String)">
+            <summary>
+            Gets the amount of confirmed ratings for user
+            </summary>
+            <returns>Amount</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.GetUnconfirmedRatingsAmount">
+            <summary>
+            Gets the amount of unconfirmed ratings
+            </summary>
+            <returns>Amount</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.GetUnconfirmedRatingsAmountForUser(System.String)">
+            <summary>
+            Gets the amount of unconfirmed ratings for user
+            </summary>
+            <returns>Amout</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.GetUnconfirmedRatings">
+            <summary>
+            Gets the unconfirmed ratings
+            </summary>
+            <returns>List of unconfirmed ratings</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.GetRatingsForLocation(System.Int32)">
+            <summary>
+            Gets all confirmed rating for given location
+            </summary>
+            <param name="locationId">The location ID</param>
+            <returns>All confirmed ratings for location</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.GetRatingsForUser(System.String)">
+            <summary>
+            Gets all ratings for given user
+            </summary>
+            <param name="email">User's email</param>
+            <returns>User's all ratings</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rating.Delete(System.Int32)">
+            <summary>
+            Delete a rating
+            </summary>
+            <param name="id">Rating ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.Approve(System.Int32)">
+            <summary>
+            Approves a rental by ID
+            </summary>
+            <param name="id">Rental's ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.CheckRentalAvailability(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            Determines if a location is available between two dates
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.HasApprovedRentalInPast(System.Int32,System.String)">
+            <summary>
+            Determines whether user has an approved rental in the past for the given location
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.GetAllRentalsForUser(System.String)">
+            <summary>
+            Gets all rentals for a user
+            </summary>
+            <param name="email">User's email</param>
+            <returns>All rental for user</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.GetPendingRentalsAmountForUser(System.String)">
+            <summary>
+            Gets all pending rentals amount for a user
+            </summary>
+            <param name="email">User's email</param>
+            <returns>All pending rentals amount</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.GetApprovedRentalsForLocationAsFullcalendar(System.Int32)">
+            <summary>
+            Gets all approved rentals as fullcalendar objects
+            </summary>
+            <param name="locationId">The location's ID</param>
+            <returns>List of fullcalendar</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.GetApprovedRentalRequestsForUser(System.String)">
+            <summary>
+            Gets all approved rentals for a user
+            </summary>
+            <param name="email">User's email</param>
+            <returns>All rental for user</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.GetPendingRental(System.Int32,System.Int32)">
+            <summary>
+            Gets pending location rental for user
+            </summary>
+            <param name="userId">User's ID</param>
+            <param name="locationId">Location ID</param>
+            <returns>All pending rentals</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.GetPendingRentalRequestsForUser(System.String)">
+            <summary>
+            Gets all pending rental requests that belongs to user
+            </summary>
+            <param name="email">User's email</param>
+            <returns>All pending rentals</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.GetRentalById(System.Int32)">
+            <summary>
+            Gets a rental by id
+            </summary>
+            <param name="id">Rental ID</param>
+            <returns>Rental</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.InsertRental(System.Int32,Locs4Youth.Models.RentModel)">
+            <summary>
+            Insert a new rental entry
+            </summary>
+            <param name="userId">The user's ID</param>
+            <param name="model">The Rent View Model</param>
+        </member>
+        <member name="M:Locs4Youth.Models.Rental.DeleteRental(System.Int32)">
+            <summary>
+            Deletes a rental by ID
+            </summary>
+            <param name="id">Rental ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.User.Activate(System.Int32)">
+            <summary>
+            Activates a user
+            </summary>
+            <param name="userId">User's ID</param>
+        </member>
+        <member name="M:Locs4Youth.Models.User.ChangePassword(System.String,System.String)">
+            <summary>
+            Changes the user's password
+            </summary>
+            <param name="email">User's unique e-mail</param>
+            <param name="newHash">The new password hash</param>
+        </member>
+        <member name="M:Locs4Youth.Models.User.CheckUserInRole(System.String,System.String)">
+            <summary>
+            Checks if user is in given role
+            </summary>
+            <param name="email">User's email</param>
+            <param name="role">User's potential role</param>
+            <returns>Is in role or not</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.User.GetAllUsers">
+            <summary>
+            Retrieves all users
+            </summary>
+            <returns>List of every user</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.User.GetRoles(System.String)">
+            <summary>
+            Gets the roles the user belongs to
+            </summary>
+            <returns>User's roles</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.User.GetUserByEmail(System.String)">
+            <summary>
+            Retrieves a user by e-mail
+            </summary>
+            <param name="email">The user's e-mail address</param>
+            <returns>The found user</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.User.GetUserById(System.Int32)">
+            <summary>
+            Retrieves a user by ID
+            </summary>
+            <param name="uid">The user's ID</param>
+            <returns>The found user</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.User.GetUserProfile(System.String)">
+            <summary>
+            Get user ProfileModel by e-mail
+            </summary>
+            <param name="email">The user's e-mail</param>
+            <returns>A ProfileModel object</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.User.Promote(System.Int32)">
+            <summary>
+            Promotes a user to an administrator role
+            </summary>
+            <param name="id">The user's ID</param>
+        </member>
+        <member name="T:Locs4Youth.Models.Partners">
+            <summary>
+            Fetches items from partners
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Models.Partners.Matthias(Locs4Youth.Models.FilterModel)">
+            <summary>
+            Partner 1
+            </summary>
+            <param name="model">Filter Model</param>
+            <returns>List of shared locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Partners.Laurens(Locs4Youth.Models.FilterModel)">
+            <summary>
+            Partner 2
+            </summary>
+            <param name="model">Filter Model</param>
+            <returns>List of shared locations</returns>
+        </member>
+        <member name="M:Locs4Youth.Models.Partners.GetJson(System.String)">
+            <summary>
+            Retrieves JSON and parses
+            </summary>
+            <param name="url">URL to read</param>
+            <returns>JSON (as string)</returns>
+        </member>
+        <member name="T:Locs4Youth.Register.AntiforgeryChecker">
+            <summary>
+            Source: http://willseitz-code.blogspot.be/2013/06/cross-site-request-forgery-for-web-forms.html
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Register.Register.SendActivationEmail(Locs4Youth.Models.User)">
+            <summary>
+            Prepares an activation e-mail
+            </summary>
+            <param name="usr">The user the mail belongs to</param>
+            <returns>The e-mail</returns>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.form1">
+            <summary>
+            form1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.lbl_message">
+            <summary>
+            lbl_message control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.Lastname">
+            <summary>
+            Lastname control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.RequiredFieldValidator1">
+            <summary>
+            RequiredFieldValidator1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.Firstname">
+            <summary>
+            Firstname control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.RequiredFieldValidator2">
+            <summary>
+            RequiredFieldValidator2 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.Email">
+            <summary>
+            Email control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.RequiredFieldValidator3">
+            <summary>
+            RequiredFieldValidator3 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.RegularExpressionValidator1">
+            <summary>
+            RegularExpressionValidator1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.Password">
+            <summary>
+            Password control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.RequiredFieldValidator4">
+            <summary>
+            RequiredFieldValidator4 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.ConfirmPassword">
+            <summary>
+            ConfirmPassword control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.RequiredFieldValidator5">
+            <summary>
+            RequiredFieldValidator5 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.CompareValidator1">
+            <summary>
+            CompareValidator1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.antiforgery">
+            <summary>
+            antiforgery control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Locs4Youth.Register.Register.submit">
+            <summary>
+            submit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="M:Locs4Youth.Utils.StringExtensions.Capitalise(System.String,System.String)">
+            <summary>
+            https://stackoverflow.com/a/17187010
+            </summary>
+        </member>
+        <member name="M:Locs4Youth.Utils.ImageHelper.DeleteImage(System.Int32,System.String)">
+            <summary>
+            Deletes an image from disk
+            </summary>
+            <param name="id">The name of image</param>
+            <param name="dir">The directory</param>
+        </member>
+        <member name="M:Locs4Youth.Utils.ImageHelper.GetAvatar(System.String,System.Int32)">
+            <summary>
+            Gets avatar URL
+            </summary>
+            <param name="id">The name of image</param>
+            <param name="dir">The directory</param>
+            <returns>Avatar link</returns>
+        </member>
+        <member name="M:Locs4Youth.Utils.ImageHelper.SaveImage(System.Drawing.Bitmap,System.Int32,System.String)">
+            <summary>
+            Saves an image to disk
+            </summary>
+            <param name="img">The image</param>
+            <param name="id">The name of image</param>
+            <param name="dir">The directory</param>
+        </member>
+        <member name="M:Locs4Youth.Utils.ImageHelper.ResizeImage(System.Drawing.Image,System.Int32,System.Int32)">
+            <summary>
+            Resize the image to the specified width and height.
+            </summary>
+            <param name="image">The image to resize.</param>
+            <param name="width">The width to resize to.</param>
+            <param name="height">The height to resize to.</param>
+            <returns>The resized image.</returns>
+        </member>
+        <member name="M:Locs4Youth.Utils.PasswordStorage.CreateHash(System.String)">
+            <summary>
+            Creates a salted PBKDF2 hash of the password.
+            </summary>
+            <param name="password">The password to hash.</param>
+            <returns>The hash of the password.</returns>
+        </member>
+        <member name="M:Locs4Youth.Utils.PasswordStorage.VerifyPassword(System.String,System.String)">
+            <summary>
+            Validates a password given a hash of the correct one.
+            </summary>
+            <param name="password">The password to check.</param>
+            <param name="correctHash">A hash of the correct password.</param>
+            <returns>True if the password is correct. False otherwise.</returns>
+        </member>
+        <member name="M:Locs4Youth.Utils.PasswordStorage.SlowEquals(System.Byte[],System.Byte[])">
+            <summary>
+            Compares two byte arrays in length-constant time. This comparison
+            method is used so that password hashes cannot be extracted from
+            on-line systems using a timing attack and then attacked off-line.
+            </summary>
+            <param name="a">The first byte array.</param>
+            <param name="b">The second byte array.</param>
+            <returns>True if both byte arrays are equal. False otherwise.</returns>
+        </member>
+        <member name="M:Locs4Youth.Utils.PasswordStorage.PBKDF2(System.String,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Computes the PBKDF2-SHA1 hash of a password.
+            </summary>
+            <param name="password">The password to hash.</param>
+            <param name="salt">The salt.</param>
+            <param name="iterations">The PBKDF2 iteration count.</param>
+            <param name="outputBytes">The length of the hash to generate, in bytes.</param>
+            <returns>A hash of the password.</returns>
+        </member>
+    </members>
+</doc>

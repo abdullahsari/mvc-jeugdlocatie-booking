@@ -1,0 +1,48 @@
+﻿@using Locs4Youth.Models
+@model List<Rating>
+@{
+    ViewBag.Title = "Admin Portaal: Beoordelingen in afwachting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    @Styles.Render("~/Content/css/ratings.css")
+}
+@Html.ActionLink("« Terug naar portaal", "Index", "Admin")
+<h2>@ViewBag.Title</h2>
+@if (Model.Count == 0)
+{
+    <p class="bottom-buffer">Er zijn op dit ogenblik geen beoordelingen die niet bevestigd zijn.</p>
+}
+else
+{
+    <table class="table well well-sm">
+        <thead>
+            <tr>
+                <th>Locatie</th>
+                <th>Gebruiker</th>
+                <th>Score</th>
+                <th>Bericht</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rating rating in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(rating.Location.Title, "Detail", "Locations", new { @id = rating.LocationId }, null)</td>
+                    <td>@Html.ActionLink($"{rating.User.Firstname} {rating.User.Lastname}", "User", "Admin", new { @id = rating.UserId }, new { @target = "_blank" })</td>
+                    <td>@rating.Score</td>
+                    <td>@rating.Message</td>
+                    <td>
+                        <a class="btn btn-success" href="@Url.Action("ApproveRating", "Admin", new { @id = rating.Id }, null)"><i class="glyphicon glyphicon-ok"></i></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="@Url.Action("RejectRating", "Admin", new { @id = rating.Id }, null)"><i class="glyphicon glyphicon-remove"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

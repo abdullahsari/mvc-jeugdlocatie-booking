@@ -1,0 +1,10 @@
+﻿@model Locs4Youth.Models.ActivationEmailModel
+@{
+    Layout = "~/Views/Email/_Layout.cshtml";
+}
+<p>Hallo @Model.User.Firstname @Model.User.Lastname,</p>
+<p>
+    U bent er bijna!<br />
+    Alvorens van start te kunnen gaan, moet u eerst uw account activeren op de volgende link:<br />
+    <a href="@Request.Url.GetLeftPart(UriPartial.Authority)@Url.Action("Activate", "Account", new { Code = Model.ActivationCode.ToString(), UserId = Model.User.Id })">Klik hier om uw account te activeren.</a>
+</p>

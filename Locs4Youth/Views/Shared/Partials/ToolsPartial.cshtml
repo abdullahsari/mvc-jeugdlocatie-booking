@@ -1,0 +1,12 @@
+﻿<ul class="nav navbar-nav navbar-right">
+@if (User.Identity.IsAuthenticated)
+{
+    <li>@Html.ActionLink(User.Identity.Name, "Index", "Account", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Account" ? "active" : String.Empty) })</li>
+    <li>@Html.ActionLink("Uitloggen", "SignOut", "Account")</li>
+}
+else
+{
+    <li>@Html.ActionLink("Registreren", "SignOn", "Account")</li>
+    <li>@Html.ActionLink("Inloggen", "SignIn", "Account", null, new { @class = (ViewContext.RouteData.Values["controller"].ToString() == "Account" && ViewContext.RouteData.Values["action"].ToString() == "SignIn" ? "active" : String.Empty) })</li>
+}
+</ul>
